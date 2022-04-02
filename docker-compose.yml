@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  #   backend:
+
+  frontend:
+    build:
+      context: ./frontend
+      # dockerfile: ./frontend/Dockerfile
+    command: [ "npm", "start" ]
+    ports:
+      - 3000:3000
+    # networks:
+    #   - app-tier
+    volumes:
+      - ./frontend:/app
+    environment:
+      - CI=true
+      - CHOKIDAR_USEPOLLING=true
+    tty: true
+
+#   db:
+
+#   elasticsearch:
