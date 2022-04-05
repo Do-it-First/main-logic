@@ -7,7 +7,7 @@ services:
     build:
       context: ./frontend
       # dockerfile: ./frontend/Dockerfile
-    command: [ "npm", "start" ]
+    command: ["npm", "start"]
     ports:
       - 3000:3000
     # networks:
@@ -18,7 +18,27 @@ services:
       - CI=true
       - CHOKIDAR_USEPOLLING=true
     tty: true
-
+  backend:
+    build:
+      context: ./backend
+      args:
+        DJANGO_ALLOWED_HOSTS: "*"
+        DJANGO_SECRET_KEY: "*"
+        DJANGO_CORS_ORIGIN_WHITELIST: "*"
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    networks:
+      - app-tier
+    volumes:
+      - ./backend/:/backend/
+    restart: always
+    expose:
+      - 8000
+    env_file:
+      - ./settings/dev/.env.dev
+    # networks:
+    #     - "backend"
 #   db:
 
 #   elasticsearch:
