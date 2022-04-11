@@ -39,22 +39,21 @@ class WebToonDetail(APIView):
     # Blog 객체 가져오기
     def get_object(self, pk):
         try:
+            pk = ObjectId(pk)
             return Navertoon.objects.get(_id=pk)
         except Navertoon.DoesNotExist:
             raise Http404
     
     # Blog의 detail 보기
-    def get(self, request, _id, format=None):
-        print('id:', _id)
-        print('id:', type(_id))
-        nw_object = self.get_object(_id)
+    def get(self, request, pk, format=None):
+        nw_object = self.get_object(pk)
         serializer = NavertoonSerializer(nw_object)
         return Response(serializer.data)
 
     # Blog 수정하기
     def put(self, request, pk, format=None):
-        blog = self.get_object(pk)
-        serializer = NavertoonSerializer(blog, data=request.data) 
+        nw_object = self.get_object(pk)
+        serializer = NavertoonSerializer(nw_object, data=request.data) 
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data) 
@@ -62,6 +61,6 @@ class WebToonDetail(APIView):
 
     # Blog 삭제하기
     def delete(self, request, pk, format=None):
-        blog = self.get_object(pk)
-        blog.delete()
+        nw_object = self.get_object(pk)
+        nw_object.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)  

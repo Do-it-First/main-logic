@@ -9,7 +9,7 @@ from . import views
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('webtoons/', views.WebToonList.as_view()),
-    path('webtoon/<str:_id>/', views.WebToonDetail.as_view()),
+    path('webtoon/<str:pk>/', views.WebToonDetail.as_view()),
     # path('', include(router.urls)),
 
 		# standard DRF Views Example
