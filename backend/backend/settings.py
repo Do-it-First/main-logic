@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'corsheaders',
     'main.apps.MainConfig',
+    'app_crawling.apps.AppCrawlingConfig',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +52,18 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# ELASTICSEARCH_DSL={
+#     'default': {
+#         'hosts': 'elasticsearch:9200'
+#     },
+# }
+
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ]
+}
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -76,8 +91,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'CLIENT': {
+            "host": "mongodb+srv://doitfirst:lPmZ7YI9nexn8qa6@cluster-do-it-first.njk1p.mongodb.net/myFirstDatabase",
+            "name": "wt_info_db"
+        }
     }
 }
 
@@ -104,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-KR'
 
 TIME_ZONE = 'Asia/Seoul'
 

@@ -1,3 +1,67 @@
-from django.shortcuts import render
+# 데이터 처리
+import json
+from .models import Navertoon
+from .serializers import NavertoonSerializer
+from bson.objectid import ObjectId
 
-# Create your views here.
+# APIView를 사용하기 위해 import
+from rest_framework.parsers import JSONParser
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.http import Http404
+
+# Blog의 목록을 보여주는 역할
+class WebToonList(APIView):
+
+    parser_classes = [JSONParser]
+    
+    # Blog list를 보여줄 때
+    def get(self, request):
+        nw_objects = Navertoon.objects.all()
+        # 여러 개의 객체를 serialization하기 위해 many=True로 설정
+        serializer = NavertoonSerializer(nw_objects, many=True)
+        print(serializer.data[0]['_id'])
+        print(type(serializer.data[0]['_id']))
+        return Response(serializer.data)
+
+    # 새로운 Blog 글을 작성할 때
+    def post(self, request):
+        # request.data는 사용자의 입력 데이터
+        serializer = NavertoonSerializer(data=json.loads(request.body.decode("UTF-8")))
+        if serializer.is_valid(): #유효성 검사
+            serializer.save() # 저장
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# Blog의 detail을 보여주는 역할
+class WebToonDetail(APIView):
+    # Blog 객체 가져오기
+    def get_object(self, pk):
+        try:
+            return Navertoon.objects.get(_id=pk)
+        except Navertoon.DoesNotExist:
+            raise Http404
+    
+    # Blog의 detail 보기
+    def get(self, request, _id, format=None):
+        print('id:', _id)
+        print('id:', type(_id))
+        nw_object = self.get_object(_id)
+        serializer = NavertoonSerializer(nw_object)
+        return Response(serializer.data)
+
+    # Blog 수정하기
+    def put(self, request, pk, format=None):
+        blog = self.get_object(pk)
+        serializer = NavertoonSerializer(blog, data=request.data) 
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data) 
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # Blog 삭제하기
+    def delete(self, request, pk, format=None):
+        blog = self.get_object(pk)
+        blog.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)  
