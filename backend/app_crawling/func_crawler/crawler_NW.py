@@ -1,0 +1,1 @@
+print('here is crawler for Naver webtoons!~')
