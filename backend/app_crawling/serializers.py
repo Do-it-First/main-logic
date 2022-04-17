@@ -8,6 +8,7 @@ class NavertoonSerializer(serializers.ModelSerializer):
         model = Navertoon
         fields = (
             '_id',
+            'platform',
             'day',
             'title',
             'thumbnail',

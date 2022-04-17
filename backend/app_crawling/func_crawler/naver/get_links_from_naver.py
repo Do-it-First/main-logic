@@ -13,32 +13,25 @@ week = [
 	"sun",
 ]
 
-html = requests.get('https://comic.naver.com/webtoon/weekday')
-soup = BeautifulSoup(html.text, 'html.parser')
-doc = soup.prettify()
+def get_detail_links():
 
-with open('NW.html', 'w') as html_file:
-    html_file.write(doc)
+		html = requests.get('https://comic.naver.com/webtoon/weekday')
+		soup = BeautifulSoup(html.text, 'html.parser')
+		
+		col_inners = soup.find_all('div', class_='col_inner')
 
-col_inners = soup.find_all('div', class_='col_inner')
+		detail_of_nw_list = []
 
-detail_of_nw_list = []
+		for col_inner in col_inners:
+			for k in list(col_inner.children)[3]('a'):
+					if k.get('title') != None:
+							title = k.get('title')
+							link = 'https://comic.naver.com' + k.get('href')
+							detail_of_nw_list.append(link)
 
-for col_inner in col_inners:
-		for k in list(col_inner.children)[3]('a'):
-				# i = i + 1
-				if k.get('title') != None:
-						title = k.get('title')
-						link = 'https://comic.naver.com' + k.get('href')
-						detail_of_nw_list.append(link)
+		plain = OrderedDict()
 
-plain = OrderedDict()
+		plain['links'] = detail_of_nw_list[0:3]
 
-plain['links'] = detail_of_nw_list
-
-link_json = json.dumps(plain, ensure_ascii=False, indent="\t")
-print(link_json)
-
-file = open("detail_link_list_of_naver.json", 'w')
-file.write(link_json)
-file.close()
+		link_json = json.dumps(plain, ensure_ascii=False, indent="\t")
+		return link_json
