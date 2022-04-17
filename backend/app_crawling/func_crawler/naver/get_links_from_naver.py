@@ -31,7 +31,7 @@ def get_detail_links():
 
 		plain = OrderedDict()
 
-		plain['links'] = detail_of_nw_list[0:3]
+		plain['links'] = detail_of_nw_list
 
 		link_json = json.dumps(plain, ensure_ascii=False, indent="\t")
 		return link_json
