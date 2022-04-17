@@ -1,1 +1,4 @@
-print('here is crawler for Naver webtoons!~')
+class NaverWebtoonCrawler:
+		def asdf():
+
+				print('here is crawler for Naver webtoons!~')
