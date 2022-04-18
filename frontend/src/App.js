@@ -1,14 +1,24 @@
-// import logo from './logo.svg';
-// import './App.css';
+//메인창
+import React from 'react';
+import './App.css';
+import MySearchBar from './component/MySearchBar';
+import HomeLogo from './component/HomeLogo';
 
 function App() {
+  
+  const searchItems = ["판타지", "로맨스", "무협"]
+
   return (
     <div>
-      <h1>
-        Welcom back!!!!!!!!!!!@@@@@
-      </h1>
+    
+      <HomeLogo/>
+
+      <MySearchBar searchItems={searchItems}/> 
+
+      
+
     </div>
-  );
+  )
 }
 
 export default App;
