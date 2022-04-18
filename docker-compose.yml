@@ -59,4 +59,5 @@ services:
     #     - "backend"
 #   db:
 
-#   elasticsearch:
+volumes:
+  elasticsearch:
