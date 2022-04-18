@@ -35,58 +35,9 @@ def bulk_data(es):
 				data.append(dict(info))
 
 		with open('dataset.json', 'w') as outfile:
-				json.dump(data, outfile,indent=7, ensure_ascii=False)  
-
-
+				json.dump(data, outfile,indent=7, ensure_ascii=False)
 		with open("dataset.json", encoding='utf-8') as json_file:
 				json_data = json.loads(json_file.read())
 
 		helpers.bulk(es, json_data, index=index)
-
-		# body = json.dumps(serializer.data[0], ensure_ascii=False, indent=4, default=str)
-		
-		# for one in serializer.data:
-		# 		print(type(one))
-		# 		print(one)
-
-		# json_list = []
-		# print(type(serializer.data))
-
-######################################################
-		# body = ""
-		# count = 1
-		# for i in serializer.data:
-		# 		body = body + json.dumps(
-		# 			{
-		# 				"index": {
-		# 					"_index": index,
-		# 							"_id": count
-		# 					}
-		# 				}
-		# 		) + '\n'
-		# 		body = body + json.dumps(i, ensure_ascii=False) + '\n'
-		# 		if count == 1:
-		# 				print("body: ", body)
-		# 		count += 1
-######################################################
-
-		# with open('dataset.json', 'w') as outfile:
-		# 		json.dump(body, outfile,indent=7, ensure_ascii=False)  
-		# input()
-
-		# print(body)
-		# helpers.bulk(es, body, index=index)
-
-		# es.bulk(body=body)
 		return es
-		# for orderedict in serializer.data:
-		# 		orderedict = json.dumps(orderedict, ensure_ascii=False)
-		# 		json_list.append(orderedict)
-
-		
-		# print(type(json_list))
-		# # print(json_list)
-		# print(type(json_list[0]))
-		# print(json_list[0])
-
-    # helpers.bulk(es, json_data, index=index)

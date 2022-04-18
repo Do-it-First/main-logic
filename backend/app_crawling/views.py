@@ -87,7 +87,6 @@ class Crawling(APIView):
                     if serializer.is_valid(): #유효성 검사
                         serializer.save() # 저장
                         response_json.append(serializer.data)
-                    # return Response(serializer.data, status=status.HTTP_201_CREATED)
                 except:
                     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             return Response(response_json, status=status.HTTP_201_CREATED)
