@@ -28,26 +28,32 @@ def bulk_data(es):
 
 		nw_objects = Navertoon.objects.all()
 		serializer = NavertoonSerializer(nw_objects, many=True)
-
+		json.dumps(serializer.data, ensure_ascii=False, indent=4, default=str)
+		
+		# for one in serializer.data:
+		# 		print(type(one))
+		# 		print(one)
 
 		# json_list = []
 		# print(type(serializer.data))
 
-		body = ""
-		count = 1
-		for i in serializer.data:
-				body = body + json.dumps(
-					{
-						"index": {
-							"_index": index,
-									"_id": count
-							}
-						}
-				) + '\n'
-				body = body + json.dumps(i, ensure_ascii=False) + '\n'
-				if count == 1:
-						print("body: ", body)
-				count += 1
+######################################################
+		# body = ""
+		# count = 1
+		# for i in serializer.data:
+		# 		body = body + json.dumps(
+		# 			{
+		# 				"index": {
+		# 					"_index": index,
+		# 							"_id": count
+		# 					}
+		# 				}
+		# 		) + '\n'
+		# 		body = body + json.dumps(i, ensure_ascii=False) + '\n'
+		# 		if count == 1:
+		# 				print("body: ", body)
+		# 		count += 1
+######################################################
 
 		# print(body)
 		es.bulk(body=body)
