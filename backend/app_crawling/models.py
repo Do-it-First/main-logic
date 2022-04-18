@@ -1,6 +1,7 @@
 from djongo import models
 class Navertoon(models.Model):
 		_id = models.ObjectIdField(primary_key = True)
+		platform = models.TextField()
 		day = models.TextField()
 		title = models.TextField()
 		thumbnail = models.TextField()
