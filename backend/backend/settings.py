@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'main.apps.MainConfig',
     'app_crawling.apps.AppCrawlingConfig',
+    'app_search.apps.AppSearchConfig',
 ]
 
 MIDDLEWARE = [
