@@ -94,7 +94,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'CLIENT': {
-            "host": "mongodb+srv://doitfirst:lPmZ7YI9nexn8qa6@cluster-do-it-first.njk1p.mongodb.net/myFirstDatabase",
+            "host": "mongodb+srv://doitfirst:lPmZ7YI9nexn8qa6@cluster-do-it-first.njk1p.mongodb.net/test",
             "name": "wt_info_db"
         }
     }

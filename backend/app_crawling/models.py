@@ -10,5 +10,5 @@ class Navertoon(models.Model):
 		writer = models.TextField()
 		genre = models.TextField()
 		age = models.TextField()
-		def __str__(self):
-			return self.name
+		# def __str__(self):
+		# 	return self.name
