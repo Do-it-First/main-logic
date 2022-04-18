@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'app_crawling.apps.AppCrawlingConfig',
     'app_search.apps.AppSearchConfig',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
