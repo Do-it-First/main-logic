@@ -1,3 +1,4 @@
+from ssl import DER_cert_to_PEM_cert
 from elasticsearch import Elasticsearch, helpers
 import json
 
@@ -28,7 +29,21 @@ def bulk_data(es):
 
 		nw_objects = Navertoon.objects.all()
 		serializer = NavertoonSerializer(nw_objects, many=True)
-		json.dumps(serializer.data, ensure_ascii=False, indent=4, default=str)
+		data = []
+		
+		for info in serializer.data:
+				data.append(dict(info))
+
+		with open('dataset.json', 'w') as outfile:
+				json.dump(data, outfile,indent=7, ensure_ascii=False)  
+
+
+		with open("dataset.json", encoding='utf-8') as json_file:
+				json_data = json.loads(json_file.read())
+
+		helpers.bulk(es, json_data, index=index)
+
+		# body = json.dumps(serializer.data[0], ensure_ascii=False, indent=4, default=str)
 		
 		# for one in serializer.data:
 		# 		print(type(one))
@@ -55,8 +70,14 @@ def bulk_data(es):
 		# 		count += 1
 ######################################################
 
+		# with open('dataset.json', 'w') as outfile:
+		# 		json.dump(body, outfile,indent=7, ensure_ascii=False)  
+		# input()
+
 		# print(body)
-		es.bulk(body=body)
+		# helpers.bulk(es, body, index=index)
+
+		# es.bulk(body=body)
 		return es
 		# for orderedict in serializer.data:
 		# 		orderedict = json.dumps(orderedict, ensure_ascii=False)

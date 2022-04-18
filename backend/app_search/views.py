@@ -44,4 +44,4 @@ class Search_from_keyward(APIView):
         data_list = docs
         # data_list = docs['hits']
 
-        return Response(data_list)
+        return Response(data_list, status=status.HTTP_200_OK)

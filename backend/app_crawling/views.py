@@ -23,8 +23,8 @@ class WebToonList(APIView):
         nw_objects = Navertoon.objects.all()
         # 여러 개의 객체를 serialization하기 위해 many=True로 설정
         serializer = NavertoonSerializer(nw_objects, many=True)
-        print(serializer.data[0]['_id'])
-        print(type(serializer.data[0]['_id']))
+        # print(serializer.data[0]['_id'])
+        # print(type(serializer.data[0]['_id']))
         return Response(serializer.data)
 
     # 새로운 Blog 글을 작성할 때
