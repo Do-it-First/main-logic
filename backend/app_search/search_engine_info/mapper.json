@@ -1,0 +1,94 @@
+{
+  "settings": {
+    "index": {
+      "analysis": {
+        "analyzer": {
+          "nori": {
+            "type": "custom",
+            "tokenizer": "nori_mixed"
+          }
+        },
+        "tokenizer": {
+          "nori_mixed": {
+            "type": "nori_tokenizer",
+            "decompound_mode": "mixed"
+          }
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "platform": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        },
+        "analyzer": "nori"
+      },
+      "day": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        },
+        "analyzer": "nori"
+      },
+      "title": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        },
+        "analyzer": "nori"
+      },
+      "introduction": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        },
+        "analyzer": "nori"
+      },
+      "writer": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        },
+        "analyzer": "nori"
+      },
+      "genre": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        },
+        "analyzer": "nori"
+      },
+      "age": {
+        "type": "text",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        },
+        "analyzer": "nori"
+      }
+    }
+  }
+}

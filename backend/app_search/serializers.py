@@ -19,3 +19,19 @@ class NavertoonListSerializer(serializers.ModelSerializer):
             'age',
             )
         # fields = '__all__'
+class NavertoonSearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Navertoon
+        fields = (
+            # '_id',
+            'platform',
+            'day',
+            'title',
+            # 'thumbnail',
+            # 'detail_link',
+            'introduction',
+            'writer',
+            'genre',
+            'age',
+            )
+        # fields = '__all__'

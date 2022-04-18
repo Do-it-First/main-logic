@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/main/', include('main.urls')),
     path('api/v1/crawling/', include('app_crawling.urls')),
+    path('api/v1/search/', include('app_search.urls')),
 ]
