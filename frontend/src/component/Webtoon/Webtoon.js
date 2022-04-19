@@ -10,17 +10,17 @@ import './Webtoon.css'; //나중에 여기 주소 잘 맞나 실행해보고 확
 function Webtoon(){
 
     return(
+        <div>
+            <WebtoonImg/>
 
-        <WebtoonImg/>
+            <WebtoonTitle/>
 
-        <WebtoonTitle/>
+            <WebtoonWriter/>
 
-        <WebtoonWriter/>
+            <WebtoonKeyword/>
 
-        <WebtoonKeyword/>
-
-        <Platform/>
-
+            <Platform/>
+        </div>
 
 
 
