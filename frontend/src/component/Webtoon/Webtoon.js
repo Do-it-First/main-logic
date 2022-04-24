@@ -1,26 +1,23 @@
-import React from react;
+import React, {useState}from 'react';
 import './Webtoon.css'; //나중에 여기 주소 잘 맞나 실행해보고 확인하기.
-//
 
-// import WebtoonImg from './Webtoon/~~' 여기 채워야함
-// import WebtoonTitle from './/Webtoon/~~' 여기 채워야함
-// import WebtoonWriter from './Webtoon/~~' 여기 채워야함
-// import WebtoonKeyword from './Webtoon/~~' 여기 채워야함
-// import Platform from './Webtoon/~~' 여기 채워야함
 
 function Webtoon(){
 
+    let [데이터,데이터변경] = useState('');
     return(
         <div>
-            <WebtoonImg/>
+            <WebtoonImg 데이터 = {데이터}/>
 
-            <WebtoonTitle/>
+            <WebtoonTitle 데이터 = {데이터}/>
 
-            <WebtoonWriter/>
+            <WebtoonWriter 데이터 = {데이터}/>
 
-            <WebtoonKeyword/>
+            <Platform 데이터 = {데이터}/>
 
-            <Platform/>
+            <WebtoonKeyword 데이터 = {데이터}/>
+
+
         </div>
 
 
@@ -28,5 +25,47 @@ function Webtoon(){
     )
 
 } 
+
+
+function Webtoon(){
+
+    let [데이터,데이터변경] = useState('Data');
+    // 나중에 데이터=> 다른 뱐수명으로 바꾸기
+
+    return(
+        <div className='Webtoon'>
+
+
+
+
+        </div>
+
+    )
+}
+
+function WebtoonImg(props){
+    <div className = "webimg">
+    
+
+    </div>
+
+}
+function WebtoonTitle(props){
+    <div className='webtitle'> 
+    
+    </div>
+
+}
+function WebtoonWriter(props){
+
+}
+function WebtoonPlatform(props){
+
+}
+function WebtoonKeyword(props){
+
+}
+
+
 
 export default Webtoon;

@@ -1,22 +1,31 @@
-//메인창
-import React from 'react';
+
+import React,{useState} from 'react';
 import './App.css';
-import MySearchBar from './component/MySearchBar';
 import HomeLogo from './component/HomeLogo';
-//
+
 
 function App() {
   
-  const searchItems = ["판타지", "로맨스", "무협"]
+  const [키워드,키워드변경] = useState();
 
   return (
     <div>
     
       <HomeLogo/>
-
-      <MySearchBar searchItems={searchItems}/> 
+      <SearchBar/>
 
       
+
+    </div>
+  )
+}
+
+function SearchBar(props){
+  
+  return(
+
+    <div className='searchKeyword'>
+      <input onChange = {(e)=>{props.키워드변경(e.target.value)}}/>
 
     </div>
   )
