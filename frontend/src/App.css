@@ -7,13 +7,3 @@ body{
   text-align: center;
 }
 
-.ssearchKeyword{
-  border:2px solid blue;
-  margin: 5px;
-  padding: 5px;
-}
-
-.searchKeyword ul li {
-  text-align:left;
-  text-decoration:non;
-}

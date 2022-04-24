@@ -2,6 +2,7 @@
 import React,{useState} from 'react';
 import './App.css';
 import HomeLogo from './component/HomeLogo';
+import SearchBar from './component/SearchBar';
 
 
 function App() {
@@ -20,15 +21,6 @@ function App() {
   )
 }
 
-function SearchBar(props){
-  
-  return(
 
-    <div className='searchKeyword'>
-      <input onChange = {(e)=>{props.키워드변경(e.target.value)}}/>
-
-    </div>
-  )
-}
 
 export default App;

@@ -50,20 +50,34 @@ function WebtoonImg(props){
     </div>
 
 }
+
+
 function WebtoonTitle(props){
     <div className='webtitle'> 
     
     </div>
 
 }
+
+
 function WebtoonWriter(props){
-
+    <div className='webwriter'> 
+    
+    </div>
 }
+
+
 function WebtoonPlatform(props){
-
+    <div className='webplatform'> 
+    
+    </div>
 }
-function WebtoonKeyword(props){
 
+
+function WebtoonKeyword(props){
+    <div className='webkeyword'> 
+    
+    </div>
 }
 
 
