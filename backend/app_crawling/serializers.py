@@ -3,6 +3,7 @@ from rest_framework import serializers
 
 from .models import Navertoon
 
+
 class NavertoonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Navertoon
@@ -17,5 +18,5 @@ class NavertoonSerializer(serializers.ModelSerializer):
             'writer',
             'genre',
             'age',
-            )
+        )
         # fields = '__all__'

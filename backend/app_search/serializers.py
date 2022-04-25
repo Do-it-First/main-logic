@@ -3,6 +3,7 @@ from rest_framework import serializers
 
 from app_crawling.models import Navertoon
 
+
 class NavertoonListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Navertoon
@@ -17,8 +18,10 @@ class NavertoonListSerializer(serializers.ModelSerializer):
             'writer',
             'genre',
             'age',
-            )
+        )
         # fields = '__all__'
+
+
 class NavertoonSearchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Navertoon
@@ -33,5 +36,5 @@ class NavertoonSearchSerializer(serializers.ModelSerializer):
             'writer',
             'genre',
             'age',
-            )
+        )
         # fields = '__all__'
