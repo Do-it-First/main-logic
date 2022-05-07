@@ -27,7 +27,7 @@ services:
       # dockerfile: ./frontend/Dockerfile
     command: ["npm", "start"]
     ports:
-      - 3000:3000
+      - 3030:3000
     # networks:
     #   - app-tier
     volumes:
