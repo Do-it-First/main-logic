@@ -14,7 +14,7 @@ import axios from 'axios';
 
 function App() {
   
-  const [키워드,키워드변경] = useState("");
+
 
   return (
     <div>
@@ -23,23 +23,22 @@ function App() {
       <Switch>
 
         <Route path="/" exact={true} component={Page1}>
-          {/* <Page1 키워드={키워드}/> */}
 
         </Route>
 
-        <Route path="/detail/1" component={Page2}> 
-          <Page2 키워드={키워드}/>
+        <Route path="/result/:searchId" component={Page2}> 
+          <Page2/>
           2번째 페이지 입니다
 
         </Route>     
 
-        <Route path="/detail/2" component={Page3} > 
-          <Page3/> 3번째 페이지입니다.
+        <Route path="/detail/:searchId" component={Page3} > 
+          <Page3/>3번째 페이지입니다.
         </Route>   
 
 
-        <Route path="/:id"> 
-          <div> 다시 검색해주세요.</div>
+        <Route path="*" > 
+          <div> 없는 페이지입니다.</div>
           
 
         </Route> 

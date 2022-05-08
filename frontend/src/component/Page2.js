@@ -1,14 +1,67 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import Webtoon from './Webtoon/Webtoon';
 import SearchBar from './SearchBar';
 import HomeLogo from './HomeLogo';
 import './Component.css';
+import axios from 'axios'
+import { useHistory, useParams } from 'react-router-dom';
 
 
 
 function Page2(props){
 
-    let [예시,예시변경]=useState('');
+    
+
+    const history= useHistory();
+ 
+
+    const [id, setId] = useState("키워드");
+    const [keywords, setKeywords] = useState(
+      JSON.parse(localStorage.getItem("keywords") || "[]")
+    );
+    //검색어 추가
+    const handleAddKeyword = (text) => {
+      console.log("text", text);
+      const newKeyword = {
+        id: Date.now(),
+        text: text,
+      };
+      setKeywords([newKeyword, ...keywords]);
+    };
+  
+    //검색어 삭제
+    const handleRemoveKeyword = (id) => {
+      const nextKeyword = keywords.filter((thisKeyword) => {
+        return thisKeyword.id !== id;
+      });
+      setKeywords(nextKeyword);
+    };
+  
+    //검색어 전체 삭제
+    const handleClearKeywords = () => {
+      setKeywords([]);
+    };
+  
+    const { searchId } = useParams();
+    const [searchInfo, setSearchInfo] = useState();
+    const [searched, setSearched] = useState(false);
+  
+    useEffect(() => {
+      searchId && onSubmit(searchId);
+    }, []);
+  
+    const onSubmit = (text) => {
+      axios
+        .get(`http://localhost:5001/api/v1/search?text=${text}`)
+        .then((response) => {
+          console.log(response);
+          setSearchInfo(response.data);
+          setSearched(true);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
 
 
     return(
@@ -19,19 +72,15 @@ function Page2(props){
 
             <HomeLogo/>
         
-            <SearchBar 키워드 = {props.키워드}/>
-{/* 
-            <Container>
-                <Row>
-                    <Col> <Webtoon/> </Col>
-                    <Col> <Webtoon/> </Col>
-                </Row>
-            </Container> */}
+            <SearchBar/>
 
-            {/* <div class="container"> */}
                 <div class="row">
-                    
-                     <Webtoon/>
+             
+{/* 꽃 예제보고 따라치긴 했는데 어떻게 구현될지는 모름 */}
+
+
+                     <Webtoon 
+                     />
                      <Webtoon/>
                      <Webtoon/>
                      <Webtoon/>
@@ -44,9 +93,6 @@ function Page2(props){
                      } */}
                     
                 </div>    
-            {/* </div>         */}
-
-            {/* <Webtoon/>   */}
 
 
          </div>

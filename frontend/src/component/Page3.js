@@ -6,6 +6,8 @@ import './Component.css';
 import {Button} from 'react-bootstrap';
 import axios from 'axios'
 
+
+
 import {useHistory} from 'react-router-dom';
 
 
@@ -13,8 +15,7 @@ import {useHistory} from 'react-router-dom';
 
 function Page3(){
 
-    let [웹툰하나,웹툰하나변경] = useState('');
-    let [작품소개,작품소개변경] = useState('');
+
 
     return(
 
@@ -48,7 +49,9 @@ function Introduction(){
 
     return(
         <div className='introduction'>
-           <div> DB에서 작품소개 끌어오기. </div>
+           <div> DB에서 작품소개 끌어오기. 
+               {/* {deteai_link}  */}
+            </div>
         </div>
     )
     

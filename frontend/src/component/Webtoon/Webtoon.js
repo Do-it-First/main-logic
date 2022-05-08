@@ -1,113 +1,75 @@
-import React, {useState}from 'react';
+import React, {useState} from 'react';
 import './Webtoon.css'; //나중에 여기 주소 잘 맞나 실행해보고 확인하기.
+import {Link,useParams} from 'react-router-dom';
+import PropTypes from "prop-types";
 
 
+function Webtoon({id,thumbnail,title,writer,genre,platform}){    
+    
+    const {imageId} = useParams();
+    const [webtoonInfo,setWebtoonInfo] = useState({
+    id: "",
+    platform:"",
+    title:"",
+    writer:"",
+    thumnail:"",
+    genre:"",
+    // introduction:""
 
-function Webtoon({thumbnail,title,writer,genre,platform}){    
-  
-   
+});
     return (
-        <div className='one-webtoon'>
-          
-            <div className='w-image'>
-              <img src={thumbnail} alt="썸네일"/> 
-            </div>    
-            <div className='w-title'> 제목:{title}</div>
-            <div className='w-writer'> 작가:{writer}</div>
-            <div className='w-platform'> 연재처:{platform}</div>
-            <div className='w-keyword'> 키워드:{genre}</div>
-          
+        <div className='one-webtoon' >
+            <Link 
+                to={{
+                    pathname: `/webtoon/${id}`,
+                    state:{
+                        thumbnail,
+                        title,
+                        writer,
+                        platform,
+                        genre
+                    }
+                }}
+            >    
 
 
+                    <div className='w-image'>
+                        <img src={webtoonInfo.thumbnail} alt={title} title={title}/> 
+                    </div>
+
+                    <div className='webtoon_data'>
+                        <h3 className='w-title'> 제목:{webtoonInfo.title}</h3>
+                        <h3 className='w-writer'> 작가:{webtoonInfo.writer}</h3>
+                        <h3 className='w-platform'> 연재처:{webtoonInfo.platform}</h3>
+                        <h3 className='w-keyword'> 키워드:{webtoonInfo.genre}</h3>
+                    </div>      
+                
+
+
+            
+            
+                {/* </div> */}
+
+            </Link>
+            
         </div>
-    )
+    )    
+
+    
 }
 
+Webtoon.propTypes = {
+    id: PropTypes.number.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    writer: PropTypes.string.isRequired,
+    platform: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
 
 
+  };
 
 
-
-// function Webtoon(){
-
-  
-    
-//     return(
-//         <div>
-//             <WebtoonImg />
-
-//             <WebtoonTitle />
-
-//             <WebtoonWriter />
-
-//             <WebtoonPlatform/>
-
-//             <WebtoonKeyword />
-
-
-//         </div>
-
-
-
-//     )
-
-// } 
-
-
-// // function Webtoon(){
-
-// //     let [데이터,데이터변경] = useState('Data');
-// //     // 나중에 데이터=> 다른 뱐수명으로 바꾸기
-
-// //     return(
-// //         <div className='Webtoon'>
-
-
-
-
-// //         </div>
-
-// //     )
-// // }
-
-// function WebtoonImg(props){
-//     <div className = "webimg">
-        
-//         웹툰이미지가있을자리
-
-//     </div>
-
-// }
-
-
-// function WebtoonTitle(props){
-//     <div className='webtitle'> 
-//         웹툰 이름
-
-//     </div>
-
-// }
-
-
-// function WebtoonWriter(props){
-//     <div className='webwriter'> 
-//         웹툰작가
-//     </div>
-// }
-
-
-// function WebtoonPlatform(props){
-//     <div className='webplatform'> 
-//         플랫폼
-//     </div>
-// }
-
-
-// function WebtoonKeyword(props){
-//     <div className='webkeyword'> 
-//         장르와키워드등등
-//     </div>
-// }
 
 
 
