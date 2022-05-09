@@ -48,8 +48,8 @@ function Page2(){
       searchId && onSubmit(searchId);
     }, []);
   
-    const onSubmit = (text) => {
-      axios
+    const onSubmit = async(text) => {
+      await axios
         .get(`http://localhost:8000/api/v1/webtoon?value=RJATORDJ=${text}`)
         .then((response) => {
           console.log(response.data);
@@ -88,12 +88,21 @@ function Page2(){
                       writer={props.writer}
                       platform={props.platform}
                       genre={props.genre}
+                      inproduction={props.introduction}
                       onClick={() => history.push(`/detail/${props.id}`)}
 
                     />
+
+                    
+
+
                   </div>
                 ))}
               
+              <Webtoon/> 시험용 
+
+               
+
             </div>
 
  

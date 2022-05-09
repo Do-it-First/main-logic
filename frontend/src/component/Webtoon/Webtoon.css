@@ -8,6 +8,12 @@
     text-align: left;
 }
   
+.w-introduction{
+    font-size: 18px;
+    margin-top: 18px;
+    margin-left: 10px;
+}
+
 .w-title{
     /* font-size: 32px; */
     font-size: 18px;
@@ -38,6 +44,10 @@
     background-color: rgb(197, 197, 197);
   
 }
+
+
+
+
 
 /* .webtitle{
 

@@ -16,7 +16,7 @@ import {useHistory} from 'react-router-dom';
 
 //page3 = detail
 
-function Page3({id,thumbnail,title,writer,genre,platform}){
+function Page3({id,thumbnail,title,writer,genre,platform,introduction}){
 
 
     const [pick,setPick] = useState();
