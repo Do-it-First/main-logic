@@ -20,10 +20,12 @@
     margin-left: 10px;
 }
 .w-platform{
+    font-size: 18px;
     margin-top: 18px;
     margin-left: 10px;
 }
 .w-keyword{
+    font-size: 18px;
     margin-top: 18px;
     margin-left: 10px;
 }
@@ -33,7 +35,7 @@
 .w-image{
     height: 200px;
     width: 200px; 
-    background-color: grey;
+    background-color: rgb(197, 197, 197);
   
 }
 

@@ -5,17 +5,15 @@ import HomeLogo from './HomeLogo';
 import './Component.css';
 import axios from 'axios'
 import { useHistory, useParams } from 'react-router-dom';
+import History from './history';
 
 
+//page2 = SearchResult
 
-function Page2(props){
-
-    
+function Page2(){
 
     const history= useHistory();
- 
-
-    const [id, setId] = useState("키워드");
+    const [id, setId] = useState("판타지");
     const [keywords, setKeywords] = useState(
       JSON.parse(localStorage.getItem("keywords") || "[]")
     );
@@ -52,10 +50,13 @@ function Page2(props){
   
     const onSubmit = (text) => {
       axios
-        .get(`http://localhost:5001/api/v1/search?text=${text}`)
+        .get(`http://localhost:8000/api/v1/webtoon?value=RJATORDJ=${text}`)
         .then((response) => {
-          console.log(response);
-          setSearchInfo(response.data);
+          console.log(response.data);
+          //여기 예제에서 변경해봄. 이게 맞나 잘 모르겟다
+          // setSearchInfo(response.data);
+          setSearchInfo([...searchInfo,...response.data]);
+          
           setSearched(true);
         })
         .catch((error) => {
@@ -66,35 +67,36 @@ function Page2(props){
 
     return(
 
-
         <div>
-
-
             <HomeLogo/>
-        
-            <SearchBar/>
+            <SearchBar calssName="searchBar" onAddKeyword={handleAddKeyword}></SearchBar>
+            {/* <History
+              keywords={keywords}
+              onClearKeywords={handleClearKeywords}
+              onRemoveKeyword={handleRemoveKeyword}
+              /> */}
 
-                <div class="row">
-             
-{/* 꽃 예제보고 따라치긴 했는데 어떻게 구현될지는 모름 */}
+            {/* <div className="flex flex-wrap justify-center"> */}
+            
+            <div>  
+              {searched &&
+                searchInfo?.idList?.map((props, index) => (
+                  <div key={index}>
+                    <Webtoon
+                      thumbnail={props.thumbnail}
+                      title={props.title}
+                      writer={props.writer}
+                      platform={props.platform}
+                      genre={props.genre}
+                      onClick={() => history.push(`/detail/${props.id}`)}
 
+                    />
+                  </div>
+                ))}
+              
+            </div>
 
-                     <Webtoon 
-                     />
-                     <Webtoon/>
-                     <Webtoon/>
-                     <Webtoon/>
-
-                     {/* {
-                         예시.map((a,i)=>{
-                             return <Webtoon 예시={예시[i]} i={i} key={i} />
-                         })
-
-                     } */}
-                    
-                </div>    
-
-
+ 
          </div>
         
     )
@@ -104,16 +106,5 @@ function Page2(props){
 }
 
 
-// function ManyWebtoon(){
-
-//     검색된웹툰.map((a,i)=>{
-//         return <Webtoon 검색된웹툰 ={검색된웹툰[i]}/>
-//     })
-
-
-
-
-
-// }
 
 export default Page2;

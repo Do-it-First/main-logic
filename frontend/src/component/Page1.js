@@ -5,10 +5,10 @@ import SearchBar from './SearchBar';
 import {useParams} from 'react-router-dom';
 import axios from 'axios';
 
+// page1=searchpage
 
-function Page1(props){
+function Page1(){
 
-    const [랜덤웹툰,랜덤웹툰변경]=useState("");
     //string은 map을 사용할 수 없기 때문에 object 형태로 변환 시키기 위해 parsing을 해줘야함.
     const [keywords, setKeywords] = useState(
         JSON.parse(localStorage.getItem("keywords" || "[]")
@@ -46,44 +46,45 @@ function Page1(props){
         setKeywords([]);
     }
 
-    const {imageId} = useParams();
-    const [webtoonInfo,setWebtoonInfo] = useState({
-        id: "",
-        platform:"",
-        title:"",
-        writer:"",
-        thumnail:"",
-        genre:"",
-        // introduction:""
 
-    });
+    // const [searchInfo,setSearchInfo] = useState({
+    //     id: "",
+    //     platform:"",
+    //     title:"",
+    //     writer:"",
+    //     thumnail:"",
+    //     genre:"",
+    //     // introduction:""
 
-    const onSubmit = (text) => {
-        axios
-          .get(`http://localhost:8000/api/v1/webtoon?value=RJATORDJ=${text}`)
-          .then((response) => {
-            console.log(response);
-            setWebtoonInfo(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      };
+    // });
 
-      useEffect(() => {
-        onSubmit(imageId);
-      }, [imageId]);
+    // const onSubmit = (text) => {
+    //     axios
+    //       .get(`http://localhost:8000/api/v1/webtoon?value=RJATORDJ=${text}`)
+    //       .then((response) => {
+    //         console.log(response);
+    //         setSearchInfo(response.data);
+    //       })
+    //       .catch((error) => {
+    //         console.log(error);
+    //       });
+    //   };
+
+    //   useEffect(() => {
+    //     onSubmit(imageId);
+    //   }, [imageId]);
 
 
 
     return(
         <div>
             <HomeLogo/>
+            
             <SearchBar 
             onAddKeyword = {handleAddKeyword}
-            keywords={keywords}
-            onClearKeywords = {handleClearKeywords}
-            onRemoveKeywords={handleRemoveKeuword}
+            // keywords={keywords}
+            // onClearKeywords = {handleClearKeywords}
+            // onRemoveKeywords={handleRemoveKeuword}
             />
 
 

@@ -5,6 +5,8 @@ import HomeLogo from './HomeLogo';
 import './Component.css';
 import {Button} from 'react-bootstrap';
 import axios from 'axios'
+import { useParams } from 'react-router-dom';
+import History from "./history.js";
 
 
 
@@ -12,10 +14,12 @@ import {useHistory} from 'react-router-dom';
 
 
 
+//page3 = detail
 
-function Page3(){
+function Page3({id,thumbnail,title,writer,genre,platform}){
 
 
+    const [pick,setPick] = useState();
 
     return(
 
@@ -30,7 +34,7 @@ function Page3(){
             <Webtoon /> 
 
 
-            <Goplatform/>
+            <Goplatform />
 
 
             <Introduction/>
