@@ -116,7 +116,7 @@ function SearchBar(onAddKeyword){
       //엔터일때 부모의 addkeyword에 전달
       onAddKeyword(text);
       setText("");
-      history.push(`/searchresult/${text}`);
+      history.push(`/result/${text}`);
     
     }
   };
@@ -145,7 +145,7 @@ function SearchBar(onAddKeyword){
 
           {text && <RemoveIcon onClick={handleClearKeyword} />}
         </InputContainer>
-        <SearchIcon onClick={() => history.push(`/searchresult/${text}`)} />
+        <SearchIcon onClick={() => history.push(`/result/${text}`)} />
       </Container>
     </div>
 

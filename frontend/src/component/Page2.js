@@ -50,12 +50,22 @@ function Page2(){
   
     const onSubmit = async(text) => {
       await axios
-        .get(`http://localhost:8000/api/v1/webtoon?value=RJATORDJ=${text}`)
+        // .get(`http://localhost:8000/api/v1/webtoon?value=RJATORDJ=${text}`)
+        // .get(`http://localhost:8000/api/v1/webtoon?text=${text}`)
+        .get(`http://localhost:8000/api/v1/search/?search=${text}`)
+
+        // .get(`http://localhost:8000/api/v1/webtoon.json`,{
+        //   params: {
+        //     genre:{text}
+        //   },
+
+        // })
+
         .then((response) => {
           console.log(response.data);
           //여기 예제에서 변경해봄. 이게 맞나 잘 모르겟다
-          // setSearchInfo(response.data);
-          setSearchInfo([...searchInfo,...response.data]);
+          setSearchInfo(response.data);
+          // setSearchInfo([...searchInfo,...response.data]);
           
           setSearched(true);
         })
@@ -64,6 +74,8 @@ function Page2(){
         });
     };
 
+
+    
 
     return(
 
@@ -89,7 +101,7 @@ function Page2(){
                       platform={props.platform}
                       genre={props.genre}
                       inproduction={props.introduction}
-                      onClick={() => history.push(`/detail/${props.id}`)}
+                      // onClick={() => history.push(`/detail/${props.id}`)}
 
                     />
 
