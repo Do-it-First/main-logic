@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "../../node_modules/axios/index";
 import NewsItem from "./NewsItem";
+import SearchBar from "./SearchBar";
+import HomeLogo from "./HomeLogo";
+import { useParams } from "react-router-dom";
+
 
 const NewsListBlock = styled.div`
   box-sizing: border-box;
@@ -16,46 +20,85 @@ const NewsListBlock = styled.div`
   }
 `;
 
-// const sampleArticle = {
-//   title: '제목',
-//   description: '내용',
-//   url: 'https://google.com',
-//   urlToImage: 'https://via.placeholder.com/160',
-// };
 
+// const NewsList = (onAddKeyword) => {
 const NewsList = () => {
-  const [articles, setArticles] = useState(null);
+
+  const { searchId } = useParams();
+  const [hits, setArticles] = useState(null);
   const [loading, setLoding] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoding(true);
-      try {
-        const response = await axios.get("/api/v1/crawling/webtoons/");
-        setArticles(response.data);
-      } catch (e) {
-        console.log(e);
-      }
-      setLoding(false);
-    };
-    fetchData();
-  }, []);
+    searchId && fetchData(searchId);
+  }, [] );
+
+  const fetchData = async (text) => {
+
+    setLoding(true);
+    try {
+
+      // console.log(typeof onAddKeyword);
+      console.log(text);
+      const response = await axios.get(
+        `/api/v1/search/?search=${text}`
+        // `/api/v1/search/?search=공포`
+      );
+      setArticles(response.data.hits.map((one) => one._source));
+    } catch (e) {
+      console.log(e);
+    }
+    setLoding(false);
+  };
+
+
+
+
+  // useEffect(() => {
+    
+  //   const fetchData = async (text) => {
+
+  //     setLoding(true);
+  //     try {
+
+  //       // console.log(typeof onAddKeyword);
+  //       console.log(text);
+  //       const response = await axios.get(
+  //         `/api/v1/search/?search=${text}`
+  //         // `/api/v1/search/?search=공포`
+  //       );
+  //       setArticles(response.data.hits.map((one) => one._source));
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //     setLoding(false);
+  //   };
+  //   fetchData();
+  // }, []);
+
+
 
   if (loading) {
     return <NewsListBlock>대기 중...</NewsListBlock>;
   }
 
-  if (!articles) {
+  if (!hits) {
     return null;
   }
 
   return (
-    <NewsListBlock>
-      {articles.map((article) => ( 
-        <NewsItem key={article.url} article={article} />
-      ))}
-    </NewsListBlock>
+    <div>
+      <SearchBar/>
+      <NewsListBlock>
+        {hits.map((article) => (
+          <NewsItem key={article.url} article={article} />
+        ))}
+      </NewsListBlock>
+    </div>
   );
 };
 
 export default NewsList;
+
+
+
+
