@@ -2,9 +2,8 @@
 import React, {useState} from "react";
 import './Component.css';
 import { Link, useHistory } from "react-router-dom";
-import {Button} from 'react-bootstrap';
 import styled, { css } from "styled-components";
-// import { useNavigate } from "react-router-dom";
+import './Component.css';
 
 // 검색창만들기
 
@@ -93,33 +92,31 @@ const Input = styled.input`
 `;
 
 
-
-
-
 function SearchBar(onAddKeyword){
   
-    // const [키워드검색,키워드검색변경] = useState([props.키워드,props.키워드변경]);
-
-
+ 
   const [text,setText] = useState("");
   const history= useHistory();
-
-
   const handleKeyword = (e)=>{
       setText(e.target.value);
     };  
 
 
-  const handleEnter = (e) => {
-    if (text && e.keyCode === 13) {
 
-      //엔터일때 부모의 addkeyword에 전달
+  const handleEnter = (e) => {
+    
+    if (text && e.keyCode === 13) {
       onAddKeyword(text);
       setText("");
-      history.push(`/result/${text}`);
-    
+      history.push(`/result/${text}`); 
+    //버전문제로? history.push 안되는 둣,
     }
   };
+
+
+
+
+
 
   const handleClearKeyword = () => {
     setText("");
@@ -129,50 +126,32 @@ function SearchBar(onAddKeyword){
 
 
     return(
-     
-
-    <div className="w-50 mx-auto mt-8">
-      <Container className="rounded-full h-12">
-        <ArrowIcon to="/" />
-        <InputContainer>
-          <Input
-            placeholder="'키워드'및'장르'를 입력해주세요."
-            active={hasKeyword}
-            value={text}
-            onChange={handleKeyword}
-            onKeyDown={handleEnter}
-          />
-
-          {text && <RemoveIcon onClick={handleClearKeyword} />}
-        </InputContainer>
-        <SearchIcon onClick={() => history.push(`/result/${text}`)} />
-      </Container>
-    </div>
+     <div>
 
 
 
+       <div className="w-50 mx-auto mt-8">
+        <Container className="rounded-full h-12">
+          <ArrowIcon to="/" />
+          <InputContainer>
+            <Input
+              placeholder="'장르'를 입력해주세요."
+              active={hasKeyword}
+              value={text}
+              onChange={handleKeyword}
+              onKeyDown={handleEnter}
+            />
+
+            {text && <RemoveIcon onClick={handleClearKeyword} />}
+          </InputContainer>
+          <SearchIcon onClick={() => history.push(`/result/${text}`)} />
+
+        </Container>
+      </div>
 
 
-      // <div>
 
-      //     <div>
-      //       <input className= "searchBar"
-      //       placeholder="키워드 및 장르를 입력해주세요."
-      //       active={handleClearKeyword}
-      //       value={text}
-      //       onChange = {handleKeyword}
-      //       onkeyDown={handleEnter}
-      //       />
-            
-      //       {text && <RemoveIcon onClick={handleClearKeyword} />}
-      
-
-      //       <Button variant="primary"
-      //       onClick={()=>{history.push(`/searchresult/${text}`)}}> 검색 </Button>
-            
-      //     </div>
-
-      // </div>  
+    </div>  
 
 
 

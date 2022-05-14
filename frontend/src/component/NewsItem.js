@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+
 const NewsItemBlock = styled.div`
   display: flex;
 
@@ -60,7 +61,10 @@ const NewsItem = ({ article }) => {
     genre,
     thumbnail,
   } = article;
+  
   return (
+
+
     <NewsItemBlock>
       {thumbnail && (
         <div className="thumbnail">
