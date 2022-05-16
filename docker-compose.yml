@@ -31,7 +31,7 @@ services:
     # networks:
     #   - app-tier
     volumes:
-      - ./frontend:/app
+      - ./frontend:/frontend
     environment:
       - CI=true
       - CHOKIDAR_USEPOLLING=true
