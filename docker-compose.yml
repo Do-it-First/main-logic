@@ -61,6 +61,28 @@ services:
     # networks:
     #     - "backend"
 #   db:
+  
+
+  redis:
+    container_name: redis
+    image: redis:alpine
+    ports:
+    - "6379:6379"
+    restart: unless-stopped
+    volumes: 
+      - proj-redis:/data
+
+  worker:
+    container_name: worker
+    build:
+      context: ./backend
+    restart: unless-stopped
+    command: celery -A backend worker --loglevel=info
+    depends_on:
+      - redis
+    volumes:
+      - ./backend/:/backend/
 
 volumes:
+  proj-redis:
   elasticsearch:

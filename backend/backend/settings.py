@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'app_crawling.apps.AppCrawlingConfig',
     'app_search.apps.AppSearchConfig',
+    'django_celery_beat',
     'drf_yasg',
 ]
 
@@ -101,6 +102,24 @@ DATABASES = {
     }
 }
 
+
+# CELERY SETTINGS
+CELERY_TIMEZONE = 'Asia/Seoul'
+CELERY_BROKER_URL = 'redis://redis:6379/1'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/1'
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://redis:6379/1',  # redis_server: docker container이름
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
