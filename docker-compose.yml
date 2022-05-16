@@ -2,6 +2,7 @@ version: "3"
 
 services:
   elasticsearch:
+    container_name: elastic_search
     build:
       context: ELK/elasticsearch/
       args:
@@ -22,6 +23,7 @@ services:
     #   - app-tier
 
   frontend:
+    container_name: react
     build:
       context: ./frontend
       # dockerfile: ./frontend/Dockerfile
@@ -37,6 +39,7 @@ services:
       - CHOKIDAR_USEPOLLING=true
     tty: true
   backend:
+    container_name: django
     build:
       context: ./backend
       args:
