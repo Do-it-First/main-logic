@@ -2,8 +2,30 @@
 version: "3"
 
 services:
+  elasticsearch:
+    container_name: elastic_search_prod
+    build:
+      context: ELK/elasticsearch/
+      args:
+        ELK_VERSION: 7.17.0
+    volumes:
+      - ./ELK/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
+      - elasticsearch:/usr/share/elasticsearch/data:z
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_PASSWORD: changeme
+      # Use single node discovery in order to disable production mode and avoid bootstrap checks.
+      # see: https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+      discovery.type: single-node
+    # networks:
+    #   - app-tier
+
   # Django 컨테이너
   backend:
+    container_name: django_prod
     build:
       context: ./backend
       args:
@@ -23,6 +45,7 @@ services:
       - ./settings/prod/.env.prod
 
   frontend:
+    container_name: react_prod
     build:
       context: ./frontend
       args:
@@ -32,12 +55,13 @@ services:
     volumes:
       - ./frontend/:/frontend
       - ./frontend/node_modules/:/frontend/node_modules
-      # - build_folder:/frontend/build
+      - build_folder:/frontend/build
     tty: true
 
   # nginx 컨테이너(서버)
   nginx:
-    build: ./nginx
+    container_name: nginx_prod
+    build: ./web
     ports:
       - 80:8080
     volumes:
@@ -50,7 +74,7 @@ services:
 
 # 컨테이너 내려도 데이터 유지되도록 함
 volumes:
-  postgres_data: null
   static_volume: null
   media_volume: null
   build_folder: null
+  elasticsearch:
