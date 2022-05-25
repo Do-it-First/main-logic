@@ -92,9 +92,9 @@ const Input = styled.input`
 `;
 
 
-function SearchBar(onAddKeyword){
+function SearchBar({onAddKeyword}){
   
- 
+
   const [text,setText] = useState("");
   const history= useHistory();
   const handleKeyword = (e)=>{
@@ -103,15 +103,15 @@ function SearchBar(onAddKeyword){
 
 
 
-  const handleEnter = (e) => {
+  // const handleEnter = (e) => {
     
-    if (text && e.keyCode === 13) {
-      onAddKeyword(text);
-      setText("");
-      history.push(`/result/${text}`); 
-    //버전문제로? history.push 안되는 둣,
-    }
-  };
+  //   if (text && e.keyCode === 13) {
+  //     onAddKeyword(text);
+  //     setText("");
+  //     history.push(`/result/${text}`); 
+  //   //버전문제로? history.push 안되는 둣,
+  //   }
+  // };
 
 
 
@@ -139,7 +139,7 @@ function SearchBar(onAddKeyword){
               active={hasKeyword}
               value={text}
               onChange={handleKeyword}
-              onKeyDown={handleEnter}
+              // onKeyDown={handleEnter}
             />
 
             {text && <RemoveIcon onClick={handleClearKeyword} />}
