@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'app_crawling.apps.AppCrawlingConfig',
     'app_search.apps.AppSearchConfig',
+    'app_time_save.apps.AppTimeSaveConfig',
     'drf_yasg',
 ]
 

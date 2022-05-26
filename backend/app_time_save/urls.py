@@ -8,7 +8,5 @@ from . import views
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path('webtoons/', views.WebToonList.as_view()),
-    path('webtoon/<str:pk>/', views.WebToonDetail.as_view()),
-    path('platform/', views.Crawling.as_view()),
+    path('', views.TimeAPI.as_view()),
 ]
